@@ -50,6 +50,6 @@ def send_personalized_messages(csv_file: str, source: str):
 
 # Example usage
 if __name__ == "__main__":
-    csv_file = 'contacts.csv'  # Path to your CSV file
+    csv_file = 'data/contacts.csv'  # Path to your CSV file
     source = config('DEYWURO_SOURCE')  # Approved Deywuro sender ID
     send_personalized_messages(csv_file, source)

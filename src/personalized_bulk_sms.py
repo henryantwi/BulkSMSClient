@@ -54,7 +54,7 @@ def send_personalized_sms_from_csv(file_path: str, sender_id: str):
 
 
 # Example usage
-file_path = "contacts.csv"  # Path to your CSV file
+file_path = "data/contacts.csv"  # Path to your CSV file
 sender_id = config('DEYWURO_SOURCE')  # Pre-approved sender ID
 
 response = send_personalized_sms_from_csv(file_path, sender_id)
