@@ -37,9 +37,9 @@ def send_sms_get(destination: List[str], source: str, message: str) -> dict:
 
 # Example usage
 if __name__ == "__main__":
-    destination = ["233200000000", "2332000000", "233570000"]  # Destination contacts
+    destination = ["233551188495",]  # Destination contacts
     source = config('DEYWURO_SOURCE', cast=str)  # Approved Deywuro sender ID
-    message = "Hi, this is a test message from {PLACEHOLDER}."  # Message to send
+    message = "Hello Bright Kwarteng, this is a Test Bulk Message."  # Message to send
 
     result = send_sms_get(destination, source, message)
     print(result)

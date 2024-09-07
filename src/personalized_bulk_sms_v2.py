@@ -1,12 +1,11 @@
 import requests
-from typing import List
 from decouple import config
 import urllib.parse
 import csv
 
 
 # Function to send SMS using Deywuro API (GET request)
-def send_sms_get(destination: str, source: str, message: str) -> dict:
+def send_sms_get(destination: str, message: str, source: str) -> dict:
     base_url = "https://deywuro.com/api/sms/"
 
     # Loading credentials from the .env file
@@ -41,15 +40,16 @@ def send_personalized_messages(csv_file: str, source: str):
     with open(csv_file, mode='r') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            name = row['name']
-            phone = row['phone']
-            message = f"Hi {name}, this is a personalized message from the UCM SRID team."
-            result = send_sms_get(phone, source, message)
-            print(f"Sent to {name} ({phone}): {result}")
+            if (role := row['role'].upper()) == 'MEMBER':
+                name = row['name']
+                phone = row['phone']
+                message = f"Hi {name}, this is a personalized message from the UCM SRID team."
+                result = send_sms_get(phone, message, source)
+                print(f"Sent to {name} ({phone}): {result}")
 
 
 # Example usage
 if __name__ == "__main__":
     csv_file = 'data/contacts.csv'  # Path to your CSV file
-    source = config('DEYWURO_SOURCE')  # Approved Deywuro sender ID
+    source = config('DEYWURO_SOURCE', cast=str)  # Approved Deywuro sender ID
     send_personalized_messages(csv_file, source)
